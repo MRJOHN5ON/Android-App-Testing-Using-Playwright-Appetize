@@ -17,7 +17,7 @@ I used Playwright's `waitForElement` and `expect` commands to check if things ap
 
 Here's a video showing the tests in action:
 
-![Demo Video](https://youtu.be/QVe7GlCP2UA)
+[Watch the Demo Video on YouTube](https://youtu.be/QVe7GlCP2UA)
 
 
 ## How to Set Up
