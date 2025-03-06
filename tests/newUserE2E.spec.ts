@@ -215,9 +215,91 @@ test('New User can select startup options and get started on first lesson', asyn
             }
         }
     })
+    await wait(1200);
+
+    //Assert 50 words in first week! is visible
+    await session.waitForElement({
+        attributes: {
+            "text": "That’s 50 words in your first week!",
+            "class": "android.widget.TextView",
+            "resource-id": "com.duolingo:id/title"
 
 
+        }
+    });
 
+    await waitForContinueButton(session);
+    await tapContinueButton(session)
+
+    await wait(1200);
+
+    //Assert Ill remind you to practice message is visible
+    await session.waitForElement({
+        attributes: {
+            "text": "I’ll remind you to practice so it becomes a habit!",
+            "class": "android.widget.TextView",
+            "resource-id": "com.duolingo:id/title"
+
+
+        }
+    });
+    // Tap on allow Notifications within App
+    await session.tap({
+        element: {
+            attributes: {
+                "class": "android.widget.LinearLayout",
+                "resource-id": "com.duolingo:id/nativeOptInPromptAllow"
+            }
+        }
+    })
+    await wait(900);
+    /// Enable permission within system 
+    await session.tap({
+        element: {
+            attributes: {
+                "text": "Allow",
+                "class": "android.widget.Button",
+                "resource-id": "com.android.permissioncontroller:id/permission_allow_button"
+            }
+        }
+    })
+
+    await wait(1200);
+
+    //Assert heres what you can achieve in 3 months message is visible
+    await session.waitForElement({
+        attributes: {
+            "text": "Here’s what you can achieve in 3 months!",
+            "class": "android.widget.TextView",
+            "resource-id": "com.duolingo:id/title"
+
+
+        }
+    });
+
+    await waitForContinueButton(session);
+    await tapContinueButton(session);
+    await wait(1200);
+
+    //tap on start from scratch option
+    await session.tap({
+        element: {
+            attributes: {
+                "text": "Start from scratch!",
+                "class": "android.widget.TextView",
+                "resource-id": "com.duolingo:id/optionSubheader"
+            }
+        }
+
+
+    })
+    await waitForContinueButton(session);
+    await tapContinueButton(session);
+    await wait(1200);
+
+    await waitForContinueButton(session);
+    await tapContinueButton(session);
+    await wait(1200);
 
 
 
