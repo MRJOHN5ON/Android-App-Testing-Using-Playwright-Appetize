@@ -1,81 +1,75 @@
-# Appetize Playwright Tests
+# Testing Duolingo Android App with Appetize & Playwright
 
-This project was generated and exported by [Appetize](https://appetize.io).
+I created this project to test the Duolingo Android app using Playwright and Appetize. I learned about this setup from [this video](https://www.youtube.com/watch?v=OOBjzIyiW0Y), but instead of using Appetize's test recorder, I used it to help me find the right elements to click and interact with in the app.
 
-## Running your Tests
+## What This Test Does
 
-Make sure you have [Node.js](https://nodejs.org/en) 18 or later installed. Then, in this directory, run:
+This test shows how a new user would use the Duolingo app for the first time. It tests:
+- Opening the app
+- Picking a language to learn
+- Setting up user preferences
+- Allowing notifications
+- Choosing a learning path
 
+I used Playwright's `waitForElement` and `expect` commands to check if things appear on screen before clicking them. Sometimes I had to add small delays because the app moves very quickly between screens.
+
+## Demo Video
+
+Here's a video showing the tests in action:
+
+![Demo Video](./assets/ScreenRecording.mov)
+
+## How to Set Up
+
+1. Make sure you have Node.js 18 or newer installed
+2. Download this project to your computer
+3. Open your terminal and install the needed packages:
 ```bash
-npm install             # install dependencies
-npx playwright install  # setup Playwright browsers
-npm run test            # run your tests!
+npm install
+```
+4. Set up Playwright:
+```bash
+npx playwright install
 ```
 
-View the [Appetize documentation](https://docs.appetize.io/javascript-sdk/playwright) for more information.
+## Setting Up Appetize
 
-## Configuration
-
-You'll find the configuration for your Appetize tests in `playwright.config.ts`. This file contains configuration for both
-Playwright and your Appetize sessions.
-
-These will apply for all tests in your project, but you can override them in your test files with:
-
-```ts
-import { test } from '@appetize/playwright';
-
-test.use({
-    config: {
-        /* some config */
-    },
-});
+1. Sign up for an account at [Appetize.io](https://appetize.io)
+2. Upload the Duolingo app (.apk file) to your account
+3. Find your public key in your Appetize dashboard
+4. Create a file named `.env` and add your key like this:
+```
+PUBLIC_KEY=your_appetize_public_key_here
 ```
 
-## Writing more tests
+Want to learn more about Appetize? Check out their [help pages](https://docs.appetize.io/).
 
-You can record more tests with AppRecorder on [appetize.io](https://appetize.io) and copy them here, or you can write
-tests [manually](https://docs.appetize.io/javascript-sdk/automation).
+## Test Details
 
-Here's an example of automating a login flow for an Android app:
+I ran my tests on:
+- Phone type: Pixel 7
+- Android version: 13.0
 
-```ts
-import { test } from '@appetize/playwright';
+You can change these settings in the `playwright.config.ts` file if you want to test on different devices.
 
-test('shows greeting when user logs in', async ({ session }) => {
-    // type username
-    await session.tap({
-        element: {
-            attributes: {
-                'resource-id': 'username_field',
-            },
-        },
-    });
-    await session.type('jordan_doe');
+## Running the Tests
 
-    // type password
-    await session.tap({
-        element: {
-            attributes: {
-                'resource-id': 'password_field',
-            },
-        },
-    });
-    await session.type('securepassword');
-
-    // tap login button
-    await session.tap({
-        element: {
-            attributes: {
-                text: 'Login',
-            },
-        },
-    });
-
-    // expect to see the user's name on the screen
-    await expect(session).toHaveElement({
-        attributes: {
-            text: 'Welcome, Jordan Doe',
-        },
-    });
-});
+To run the tests, type this in your terminal:
+```bash
+npm run test
 ```
+
+## How the Tests Work
+
+The tests:
+- Find buttons and text using IDs and labels in the app
+- Wait for things to appear on screen before clicking
+- Handle permission popups (like allowing notifications)
+- Check if the right screens appear at the right time
+
+
+## Helpful Links
+
+- [Appetize Help Pages](https://docs.appetize.io/)
+- [Playwright Help Pages](https://playwright.dev/docs/intro)
+- [How to Use Appetize with JavaScript](https://docs.appetize.io/javascript-sdk/playwright)
